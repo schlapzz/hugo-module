@@ -1,0 +1,87 @@
+---
+# Source: acend-training-chart/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rel1-prometheus-basics-puzzle
+  labels:
+    helm.sh/chart: acend-training-chart-0.1.10
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-basics-puzzle
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+    - hosts:
+        - "prometheus-training-rel1.training.puzzle.ch"
+      secretName: rel1-prometheus-basics-puzzle
+  rules:
+    - host: "prometheus-training-rel1.training.puzzle.ch"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rel1-prometheus-basics-puzzle
+                port:
+                  number: 8080
+---
+# Source: acend-training-chart/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rel1-prometheus-basics-acend
+  labels:
+    helm.sh/chart: acend-training-chart-0.1.10
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-basics-acend
+spec:
+  tls:
+    - hosts:
+        - "prometheus-basics-rel1.training.acend.ch"
+      secretName: acend-wildcard
+  rules:
+    - host: "prometheus-basics-rel1.training.acend.ch"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rel1-prometheus-basics-acend
+                port:
+                  number: 8080
+---
+# Source: acend-training-chart/templates/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: rel1-prometheus-basics-baloise
+  labels:
+    helm.sh/chart: acend-training-chart-0.1.10
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-basics-baloise
+spec:
+  tls:
+    - hosts:
+        - "prometheus-basics-baloise-rel1.training.acend.ch"
+      secretName: acend-wildcard
+  rules:
+    - host: "prometheus-basics-baloise-rel1.training.acend.ch"
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: rel1-prometheus-basics-baloise
+                port:
+                  number: 8080

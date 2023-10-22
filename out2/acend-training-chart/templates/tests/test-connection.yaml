@@ -1,0 +1,63 @@
+---
+# Source: acend-training-chart/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "rel1-prometheus-basics-puzzle-test-connection"
+  labels:
+    helm.sh/chart: acend-training-chart-0.1.10
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-basics-puzzle
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['rel1-prometheus-basics-puzzle:8080']
+  restartPolicy: Never
+---
+# Source: acend-training-chart/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "rel1-prometheus-basics-acend-test-connection"
+  labels:
+    helm.sh/chart: acend-training-chart-0.1.10
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-basics-acend
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['rel1-prometheus-basics-acend:8080']
+  restartPolicy: Never
+---
+# Source: acend-training-chart/templates/tests/test-connection.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "rel1-prometheus-basics-baloise-test-connection"
+  labels:
+    helm.sh/chart: acend-training-chart-0.1.10
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-basics-baloise
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: wget
+      image: busybox
+      command: ['wget']
+      args: ['rel1-prometheus-basics-baloise:8080']
+  restartPolicy: Never

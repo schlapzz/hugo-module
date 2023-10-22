@@ -1,0 +1,66 @@
+---
+# Source: acend-training-chart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: rel1-prometheus-basics-puzzle
+  labels:
+    helm.sh/chart: acend-training-chart-0.1.10
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-basics-puzzle
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/name: prometheus-basics-puzzle
+---
+# Source: acend-training-chart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: rel1-prometheus-basics-acend
+  labels:
+    helm.sh/chart: acend-training-chart-0.1.10
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-basics-acend
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/name: prometheus-basics-acend
+---
+# Source: acend-training-chart/templates/service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: rel1-prometheus-basics-baloise
+  labels:
+    helm.sh/chart: acend-training-chart-0.1.10
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-basics-baloise
+spec:
+  type: ClusterIP
+  ports:
+    - port: 8080
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/name: prometheus-basics-baloise

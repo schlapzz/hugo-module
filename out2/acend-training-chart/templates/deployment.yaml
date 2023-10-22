@@ -1,0 +1,213 @@
+---
+# Source: acend-training-chart/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rel1-prometheus-basics-puzzle
+  labels:
+    helm.sh/chart: acend-training-chart-0.1.10
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-basics-puzzle
+  annotations:
+    timestamp: "2023-10-21 17:57:00.3921952 +0200 CEST m=+1.767613801"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: rel1
+      app.kubernetes.io/name: prometheus-basics-puzzle
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: rel1
+        app.kubernetes.io/name: prometheus-basics-puzzle
+    spec:
+      serviceAccountName: rel1-prometheus-basics
+      containers:
+        - name: training
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: {}
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          image: "quay.io/acend/prometheus-basics-training:rel1"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 2
+            successThreshold: 2
+            timeoutSeconds: 2
+          resources:
+            limits:
+              cpu: 200m
+              memory: 128Mi
+            requests:
+              cpu: 20m
+              memory: 20Mi
+---
+# Source: acend-training-chart/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rel1-prometheus-basics-acend
+  labels:
+    helm.sh/chart: acend-training-chart-0.1.10
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-basics-acend
+  annotations:
+    timestamp: "2023-10-21 17:57:00.392497 +0200 CEST m=+1.767915601"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: rel1
+      app.kubernetes.io/name: prometheus-basics-acend
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: rel1
+        app.kubernetes.io/name: prometheus-basics-acend
+    spec:
+      serviceAccountName: rel1-prometheus-basics
+      containers:
+        - name: training
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: {}
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          image: "quay.io/acend/prometheus-basics-training:rel1-acend"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 2
+            successThreshold: 2
+            timeoutSeconds: 2
+          resources:
+            limits:
+              cpu: 200m
+              memory: 128Mi
+            requests:
+              cpu: 20m
+              memory: 20Mi
+---
+# Source: acend-training-chart/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rel1-prometheus-basics-baloise
+  labels:
+    helm.sh/chart: acend-training-chart-0.1.10
+    app.kubernetes.io/instance: rel1
+    app.kubernetes.io/version: "1.0.0"
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: prometheus-basics-baloise
+  annotations:
+    timestamp: "2023-10-21 17:57:00.3927524 +0200 CEST m=+1.768171001"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: rel1
+      app.kubernetes.io/name: prometheus-basics-baloise
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/instance: rel1
+        app.kubernetes.io/name: prometheus-basics-baloise
+    spec:
+      serviceAccountName: rel1-prometheus-basics
+      containers:
+        - name: training
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: {}
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: false
+          image: "quay.io/acend/prometheus-basics-training:rel1-baloise"
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 2
+            successThreshold: 1
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+            failureThreshold: 3
+            initialDelaySeconds: 10
+            periodSeconds: 2
+            successThreshold: 2
+            timeoutSeconds: 2
+          resources:
+            limits:
+              cpu: 200m
+              memory: 128Mi
+            requests:
+              cpu: 20m
+              memory: 20Mi

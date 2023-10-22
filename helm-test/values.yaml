@@ -1,0 +1,56 @@
+acendTraining:
+  servicePort: 8080
+  deployments:
+    - 
+      name: puzzle
+      replicaCount: 2
+      image:
+        repository: quay.io/acend/prometheus-basics-training
+        pullPolicy: Always
+        tag: ""
+        tagsuffix: ""
+      ingress:
+        annotations:
+          kubernetes.io/tls-acme: "true"
+          cert-manager.io/cluster-issuer: letsencrypt-prod
+        appname: prometheus-training
+        domainmain: puzzle.ch
+        domain: training.puzzle.ch
+    - 
+      name: acend
+      replicaCount: 2
+      image:
+        repository: quay.io/acend/prometheus-basics-training
+        pullPolicy: Always
+        tag: ""
+        tagsuffix: "-acend"
+      ingress:
+        secretOverride: acend-wildcard 
+        appname: prometheus-basics
+        domain: training.acend.ch
+    - 
+      name: baloise
+      replicaCount: 2
+      image:
+        repository: quay.io/acend/prometheus-basics-training
+        pullPolicy: Always
+        tag: ""
+        tagsuffix: "-baloise"
+      ingress:
+        secretOverride: acend-wildcard 
+        appname: prometheus-basics-baloise
+        domain: training.acend.ch
+
+
+
+nameOverride: "prometheus-basics"
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
